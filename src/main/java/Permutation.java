@@ -1,40 +1,29 @@
 import java.util.*;
 
-class Permutations {
-  public static void main(String[] args) {
-    System.out.println(new Permutations().permute(new int[] {1, 2, 3}));
-  }
-
+class Permutation {
   public List<List<Integer>> permute(int[] nums) {
     List<List<Integer>> result = new ArrayList<>();
-
     int n = nums.length;
-    for (int i = 0; i < n; ++i) {
-      var input = makeList(nums);
-      var permutation = new ArrayList<Integer>();
-      backtracking(result, permutation, input, i);
-    }
-
+    boolean[] used = new boolean[n];
+    var permutation = new ArrayList<Integer>();
+    backtracking(result, permutation, nums, used);
     return result;
   }
 
-  private List<Integer> makeList(int[] arr) {
-    var list = new ArrayList<Integer>();
-    for (int i = 0; i < arr.length; ++i) {
-      list.add(arr[i]);
-    }
-    return list;
-  }
-
-  private void backtracking(List<List<Integer>> result, List<Integer> permutation, List<Integer> input, int pickedIdx) {
-    permutation.add(input.get(pickedIdx));
-    if (input.size() == 1) {
-      result.add(new ArrayList<Integer>(permutation));
+  private void backtracking(List<List<Integer>> result, List<Integer> permutation, int[] input, boolean[] used) {
+    if (input.length == permutation.size()) {
+      result.add(permutation);
       return;
     }
-    input.remove(pickedIdx);
-    for (int i = 0; i < input.size(); ++i) {
-      backtracking(result, new ArrayList<>(permutation), new ArrayList<>(input), i);
+    for (int i = 0; i < input.length; ++i) {
+      if (used[i]) {
+        continue;
+      }
+      permutation.add(input[i]);
+      used[i] = true;
+      backtracking(result, new ArrayList<>(permutation), input, used);
+      used[i] = false;
+      permutation.removeLast();
     }
   }
 }
