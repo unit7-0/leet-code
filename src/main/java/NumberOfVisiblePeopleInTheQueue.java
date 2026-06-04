@@ -10,7 +10,7 @@ public class NumberOfVisiblePeopleInTheQueue {
       int c = 0;
       while (!stack.isEmpty() && stack.peekFirst() <= h) {
         c++;
-        stack.removeFirst();
+        stack.pollFirst();
       }
       c = stack.isEmpty() ? c : (c + 1);
       stack.addFirst(h);

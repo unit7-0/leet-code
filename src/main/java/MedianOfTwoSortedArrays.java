@@ -18,7 +18,7 @@ public class MedianOfTwoSortedArrays {
       int rl2 = n2;
 
       int lrv1 = Integer.MIN_VALUE;
-      int lrv2 = Integer.NMIN_VALUE;
+      int lrv2 = Integer.MIN_VALUE;
       int rlv1 = Integer.MAX_VALUE;
       int rlv2 = Integer.MAX_VALUE;
 
